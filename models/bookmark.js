@@ -11,3 +11,5 @@ const bookmarkSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
+
+export default mongoose.model('Bookmark', bookmarkSchema);
