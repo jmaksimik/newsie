@@ -1,5 +1,5 @@
 
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from 'dotenv'
 dotenv.config()
 import 'dotenv/config.js'
 
@@ -23,13 +23,11 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 // app.use("/src", assetsRouter);
-// Configure the auth middleware
-// This decodes the jwt token, and assigns
-// the user information to req.user
+
 import auth from './config/auth.js'
 
 app.use(auth); 
-// api routes must be before the "catch all" route
+
 import userRoutes from './routes/api/users.js';
 import tagRoutes from './routes/api/tags.js';
 import bookmarkRoutes from './routes/api/bookmarks.js';
@@ -38,7 +36,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/tags', tagRoutes);
 app.use('/api/bookmarks', bookmarkRoutes)
 
-// "catch all" route
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
