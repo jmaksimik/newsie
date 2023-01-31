@@ -30,8 +30,9 @@ export default function App() {
     return (
       <Routes>
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
-        <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/bookmarks' element={<BookmarkPage />} />
+        <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
+        <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
+        <Route path='*' element={<Navigate to='/dashboard' />} />
       </Routes>
       );
     }

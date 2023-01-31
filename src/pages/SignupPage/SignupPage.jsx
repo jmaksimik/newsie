@@ -1,6 +1,6 @@
 import {Button, Form, Grid, Header, Segment} from 'semantic-ui-react';
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
@@ -84,6 +84,7 @@ export default function SignUpPage({handleSignupOrLogin}){
                 <Button type='submit' className='btn'>
                     Sign Up
                 </Button>
+                <Link to='/'>Cancel</Link>
                 {error ? <ErrorMessage error={error} /> : null}
             </Form>
 

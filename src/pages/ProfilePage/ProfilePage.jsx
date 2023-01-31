@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react';
 
-export default function ProfilePage(){
+import PageHeader from '../../components/PageHeader/PageHeader';
+
+export default function ProfilePage({loggedUser, handleLogout}){
     return (
-        <h1>Profile Page</h1>
+        <>
+            <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
+            <h1>Profile Page</h1>
+        </>
     );
 }
 

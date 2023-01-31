@@ -66,6 +66,7 @@ export default function LoginPage({handleSignupOrLogin}){
               >
                 Login
               </Button>
+              <Link to='/'>Cancel</Link>
           </Segment>
         </Form>
         {error ? <ErrorMessage error={error} /> : null}
