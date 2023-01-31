@@ -3,8 +3,9 @@ import React, {useState, useEffect} from 'react';
 import {Grid, Icon, Input} from 'semantic-ui-react';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
+import AddTagForm from '../../components/AddTagForm/AddTagForm';
 
-import * as tagsAPI from '../../utils/tagApi';
+import * as tagAPI from '../../utils/tagApi';
 
 export default function DashboardPage({handleLogout, loggedUser}){
     const [tags, setTags] = useState([]);
@@ -13,9 +14,9 @@ export default function DashboardPage({handleLogout, loggedUser}){
 
     async function handleAddTag(tag) {
         try {
-            const response = await tagsAPI.create(tag);
-            console.log('handleAddTag is running')
-            setTags([...tags, response.tag])
+            const response = await tagAPI.create(tag);
+            setTags([response.tag, ...tags])
+            console.log(tags)
 
         } catch(err) {
             console.log(err.message, 'error in adding tag');
@@ -25,9 +26,9 @@ export default function DashboardPage({handleLogout, loggedUser}){
 
     async function getTags() {
         try {
-            const response = await tagsAPI.getAll();
-            console.log(response, '<- tag data');
+            const response = await tagAPI.getAll();
             setTags(response.data);
+            console.log(tags)
 
         } catch(err) {
             console.log(err.message, 'error in fetching tags');
@@ -42,6 +43,7 @@ export default function DashboardPage({handleLogout, loggedUser}){
         <>
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
         <h1>Dashboard Page</h1>
+        <AddTagForm handleAddTag={handleAddTag} />
         </>
     )
 }
