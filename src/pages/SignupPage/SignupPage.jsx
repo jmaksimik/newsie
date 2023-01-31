@@ -1,3 +1,4 @@
+import {Button, Form, Grid, Header, Segment} from 'semantic-ui-react';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
@@ -24,7 +25,7 @@ export default function SignUpPage({handleSignupOrLogin}){
     async function handleSubmit(form) {
         form.preventDefault(); // stop browser from submitting form because we're using SPA
         try {
-            await userService.signup(form) // submits form through signup function; standard JSON submission
+            await userService.signup(state) // submits state through signup function; standard JSON submission
             handleSignupOrLogin(); // passed from app.jsx
             navigate('/dashboard'); 
         
@@ -34,7 +35,59 @@ export default function SignUpPage({handleSignupOrLogin}){
         }
     }
 
+    function handleChange(e) {
+        setState({
+            ...state, 
+            [e.target.name]: e.target.value,
+        })
+    }
+
     return (
-        <h1>Signup Page</h1>
+        <>
+            <h1>Signup Page</h1>
+            <Form autoComplete='off' onSubmit={handleSubmit}>
+                <Form.Input
+                    name='firstName'
+                    placeholder='First Name'
+                    value={state.firstName}
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Input 
+                    name='lastName'
+                    placeholder='Last Name'
+                    value={state.lastName}
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Input
+                    name='email'
+                    placeholder='Email'
+                    value={state.email}
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Input
+                    name='password'
+                    placeholder='Password'
+                    value={state.password}
+                    onChange={handleChange}
+                    required
+                />
+                <Form.Input
+                    name='passwordConf'
+                    placeholder='Confirm Password'
+                    value={state.passwordConf}
+                    onChange={handleChange}
+                    required
+                />
+                <Button type='submit' className='btn'>
+                    Sign Up
+                </Button>
+                {error ? <ErrorMessage error={error} /> : null}
+            </Form>
+
+        </>
+        
     );
 }
