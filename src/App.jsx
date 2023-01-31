@@ -19,19 +19,33 @@ export default function App() {
     setUser(userService.getUser()); // gets JWT from localstorage and decodes it
   }
 
+  function handleLogout() {
+    userService.logout();
+    setUser(null);
+    console.log('logout successful');
+  }
 
-  return (
-    <Routes>
-      <Route path='/' element={<LandingPage />} />
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/signup' 
-             element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin}/>}
-       />
-      <Route path='/dashboard' element={<DashboardPage />} />
-      <Route path='/profile' element={<ProfilePage />} />
-      <Route path='/bookmarks' element={<BookmarkPage />} />
-      <Route path='*' element={<Navigate to='/' replace />} />
-    </Routes>
-  );
+
+  if (user) {
+    return (
+      <Routes>
+        <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/bookmarks' element={<BookmarkPage />} />
+      </Routes>
+      );
+    }
+      return (
+        <Routes>
+        <Route path='/' element={<LandingPage loggedUser={user} handleSignupOrLogin={handleSignupOrLogin} />} />
+        <Route path='/login' element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
+        <Route path='/signup' 
+               element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin}/>}
+         />
+        
+        
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
+      );
 }
 
