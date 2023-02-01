@@ -4,6 +4,7 @@ import {Grid, Icon, Input} from 'semantic-ui-react';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import AddTagForm from '../../components/AddTagForm/AddTagForm';
+import TagList from '../../components/TagList/TagList';
 
 import * as tagAPI from '../../utils/tagApi';
 
@@ -45,6 +46,7 @@ export default function DashboardPage({handleLogout, loggedUser}){
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
         <h1>Dashboard Page</h1>
         <AddTagForm handleAddTag={handleAddTag} />
+        <TagList />
         </>
     )
 }
