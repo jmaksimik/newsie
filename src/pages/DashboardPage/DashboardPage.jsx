@@ -46,7 +46,9 @@ export default function DashboardPage({handleLogout, loggedUser}){
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
         <h1>Dashboard Page</h1>
         <AddTagForm handleAddTag={handleAddTag} />
-        <TagList />
+        <TagList
+            tags={tags}
+        />
         </>
     )
 }
