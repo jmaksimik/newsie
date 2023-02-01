@@ -37,6 +37,18 @@ export default function DashboardPage({handleLogout, loggedUser}){
         }
     }
 
+    async function deleteTag(tagId) {
+        try {
+            const response = await tagAPI.deleteTag(tagId);
+            console.log(response, 'Response from utils/tagApi')
+            getTags();
+
+        } catch(err){
+            console.log(err.message, 'error in deleting tag')
+            setError('error deleting tag, please try again')
+        }
+    }
+
     useEffect(() => {
         getTags();
     }, [])
@@ -48,6 +60,7 @@ export default function DashboardPage({handleLogout, loggedUser}){
         <AddTagForm handleAddTag={handleAddTag} />
         <TagList
             tags={tags}
+            deleteTag={deleteTag}
         />
         </>
     )

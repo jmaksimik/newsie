@@ -3,7 +3,8 @@ import Tag from '../models/tag.js';
 
 export default {
     create,
-    index
+    index,
+    deleteTag
 };
 
 async function create(req, res) {
@@ -30,3 +31,14 @@ async function index(req, res) {
 }
 
 
+async function deleteTag(req, res) {
+    try {
+        const tag = await Tag.findOne({'_id': req.params.id})
+        tag.remove(req.params.id);
+        await tag.save()
+        res.json({data: 'tag successfully deleted'})
+    } catch(err) {
+        console.log(err, '<-- error in controller delete function')
+        res.status(400).json({err})
+    }
+}

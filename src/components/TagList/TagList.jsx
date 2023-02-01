@@ -3,7 +3,7 @@ import {Card} from 'semantic-ui-react';
 
 import Tags from '../Tags/Tags';
 
-export default function TagList({tags}) {
+export default function TagList({tags, deleteTag}) {
     return (
         <Card.Group itemsPerRow={1} stackable>
             {tags.map((tag) => {
@@ -11,6 +11,8 @@ export default function TagList({tags}) {
                     <Tags
                         tag = {tag}
                         key={tag._id}
+                        deleteTag={deleteTag}
+
                     />
                 )
             })}
