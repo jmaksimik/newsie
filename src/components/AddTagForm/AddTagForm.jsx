@@ -11,6 +11,7 @@ export default function AddTagForm({handleAddTag}) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(title, '<- var title passed to handleAddTag in AddTagForm.jsx')
         handleAddTag(title);
     }
 

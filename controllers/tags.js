@@ -7,12 +7,11 @@ export default {
 };
 
 async function create(req, res) {
-    console.log(req.user, '<- req.user', req.body);
-
+    console.log(req.body, '<- req.body passed to controller');
     try {
         const tag = await Tag.create({
             user: req.user._id,
-            title: req.body.title,
+            title: req.body.data,
         });
         await tag.populate('user')
         res.status(201).json({tag})
@@ -23,7 +22,7 @@ async function create(req, res) {
 
 async function index(req, res) {
     try {
-        const tags = await Tag.find({}).populate('user', 'title').exec();
+        const tags = await Tag.find({}).populate('user').exec();
         res.status(200).json({data: tags});
     } catch (err) {
         res.status(400).json({err});

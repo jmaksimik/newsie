@@ -15,11 +15,13 @@ export default function DashboardPage({handleLogout, loggedUser}){
     async function handleAddTag(tag) {
         try {
             const response = await tagAPI.create(tag);
-            setTags([response.tag, ...tags])
-            console.log(tags)
+            console.log(tag, '<- tag data passed from form component to dashboard')
+            console.log(response, '<- response.tag after the tagAPI.create function is run')
+            setTags([...tags, response.tag])
+            console.log(tags, '<- tag state after setTags is run')
 
         } catch(err) {
-            console.log(err.message, 'error in adding tag');
+            console.log(err.message);
             setError('Error creating post, please try again')
         }
     }
@@ -28,7 +30,6 @@ export default function DashboardPage({handleLogout, loggedUser}){
         try {
             const response = await tagAPI.getAll();
             setTags(response.data);
-            console.log(tags)
 
         } catch(err) {
             console.log(err.message, 'error in fetching tags');
