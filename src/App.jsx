@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage/DashboardPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import BookmarkPage from './pages/BookmarkPage/BookmarkPage';
 import LandingPage from './pages/LandingPage/LandingPage';
+import TagPage from './pages/TagPage/TagPage';
 
 import userService from './utils/userService';
 
@@ -32,6 +33,7 @@ export default function App() {
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
         <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
         <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
+        <Route path='/topic/:tagId' element={<TagPage />} />
         <Route path='*' element={<Navigate to='/dashboard' />} />
       </Routes>
       );
