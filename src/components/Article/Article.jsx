@@ -1,9 +1,12 @@
-import React from 'react';
-import {Card, Image} from 'semantic-ui-react';
+import {React, useState} from 'react';
+import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
 export default function Article({article}){
+    const [bookmark, setBookmark] = useState(false)
+
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
+    const bookmarkColor = bookmark ? 'yellow' : 'black'
 
     return (
         <Card key={article._id} raised>
@@ -18,6 +21,8 @@ export default function Article({article}){
              </a> 
             <Card.Content textAlign={'left'}>
                 {formattedDate} - {article.lead_paragraph}
+                <br></br>
+                <Icon name={'bookmark'} size='large' color={bookmarkColor}  />
             </Card.Content>
         </Card>
     )

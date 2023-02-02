@@ -11,13 +11,14 @@ export default {
 
 
 async function signup(req, res) {
+  console.log(req.body, '<- req.body in controller function')
   const user = new User(req.body);
   try {
     await user.save();
     const token = createJWT(user);
     res.json({ token });
   } catch (err) {
-    // Probably a duplicate email
+    console.log(err)
     console.log('error logged in users controller signup')
     res.status(400).json(err);
   }

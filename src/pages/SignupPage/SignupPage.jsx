@@ -71,6 +71,7 @@ export default function SignUpPage({handleSignupOrLogin}){
                 <Form.Input
                     name='password'
                     placeholder='Password'
+                    type='password'
                     value={state.password}
                     onChange={handleChange}
                     required
@@ -78,6 +79,7 @@ export default function SignUpPage({handleSignupOrLogin}){
                 <Form.Input
                     name='passwordConf'
                     placeholder='Confirm Password'
+                    type='password'
                     value={state.passwordConf}
                     onChange={handleChange}
                     required

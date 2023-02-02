@@ -14,7 +14,7 @@ export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
 
     useEffect(() => {
         liftApiKeywords(tagName);
-        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&sort=newest&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
+        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
 
         async function makeApiCall() {
             try{
