@@ -18,6 +18,7 @@ async function signup(req, res) {
     res.json({ token });
   } catch (err) {
     // Probably a duplicate email
+    console.log('error logged in users controller signup')
     res.status(400).json(err);
   }
 }

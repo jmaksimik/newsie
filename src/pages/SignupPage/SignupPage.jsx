@@ -22,8 +22,8 @@ export default function SignUpPage({handleSignupOrLogin}){
     // set up navigation functionality after successful account creation
     const navigate = useNavigate();
 
-    async function handleSubmit(form) {
-        form.preventDefault(); // stop browser from submitting form because we're using SPA
+    async function handleSubmit(e) {
+        e.preventDefault(); // stop browser from submitting form because we're using SPA
         try {
             await userService.signup(state) // submits state through signup function; standard JSON submission
             handleSignupOrLogin(); // passed from app.jsx
@@ -31,6 +31,7 @@ export default function SignUpPage({handleSignupOrLogin}){
         
         } catch(err){
             console.log(err.message, 'error in signup handleSubmit')
+            console.log(state);
             setError('Check terminal, there was an error signing up')
         }
     }

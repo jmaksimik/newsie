@@ -47,9 +47,7 @@ export default function App() {
         <Routes>
         <Route path='/' element={<LandingPage loggedUser={user} handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path='/login' element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
-        <Route path='/signup' 
-               element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin}/>}
-         />
+        <Route path='/signup' element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin} />} />
         
         
         <Route path='*' element={<Navigate to='/' />} />

@@ -12,6 +12,7 @@ function signup(user) {
     if (res.ok) return res.json();
     // throw error if issue in signing up
     return res.json().then(response => {
+      console.log(user, '<-- user in signup function in utils/userService')
       throw new Error(response.error)
     })
   })
