@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
+import ArticleList from '../../components/ArticleList/ArticleList';
 
 
 export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
-    const [nytArticles, setNytArticles] = useState({})
+    const [nytArticles, setNytArticles] = useState([])
     const {tagName} = useParams();
 
     useEffect(() => {
@@ -17,7 +18,7 @@ export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
             try{
                 const responseJSON= await fetch(nytURL);
                 const data = await responseJSON.json();
-                setNytArticles(data)
+                setNytArticles(data.response.docs)
             } catch(err) {
                 console.log(err)
             }
@@ -28,7 +29,7 @@ export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
     return (
         <>
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
-        <h1>Tag Detail Page</h1>
+        <ArticleList nytArticles={nytArticles} />
         </>
     )
 }
