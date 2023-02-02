@@ -5,7 +5,7 @@ import Article from '../Article/Article';
 
 export default function ArticleList({nytArticles}){
     return (
-        <Card.Group itemsPerRow={1} stackable>
+        <Card.Group itemsPerRow={3} stackable>
             {nytArticles.map((article) => {
                 return (
                     <Article

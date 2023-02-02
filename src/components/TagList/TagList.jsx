@@ -5,7 +5,7 @@ import Tags from '../Tags/Tags';
 
 export default function TagList({tags, deleteTag}) {
     return (
-        <Card.Group itemsPerRow={1} stackable>
+        <Card.Group itemsPerRow={3} stackable>
             {tags.map((tag) => {
                 return (
                     <Tags
