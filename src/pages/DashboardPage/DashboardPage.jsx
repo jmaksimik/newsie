@@ -16,10 +16,7 @@ export default function DashboardPage({handleLogout, loggedUser}){
     async function handleAddTag(tag) {
         try {
             const response = await tagAPI.create(tag);
-            console.log(tag, '<- tag data passed from form component to dashboard')
-            console.log(response, '<- response.tag after the tagAPI.create function is run')
             setTags([...tags, response.tag])
-            console.log(tags, '<- tag state after setTags is run')
 
         } catch(err) {
             console.log(err.message);
@@ -40,7 +37,6 @@ export default function DashboardPage({handleLogout, loggedUser}){
     async function deleteTag(tagId) {
         try {
             const response = await tagAPI.deleteTag(tagId);
-            console.log(response, 'Response from utils/tagApi')
             getTags();
 
         } catch(err){

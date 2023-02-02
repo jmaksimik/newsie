@@ -14,6 +14,11 @@ import userService from './utils/userService';
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser()) // tries to grab a token if one exists
+  const [apiKeywords, setApiKeywords] = useState('')
+
+  function liftApiKeywords(keywords){
+    setApiKeywords(keywords);
+  }
 
   function handleSignupOrLogin() {
     console.log('signup/login handler running');
@@ -33,7 +38,7 @@ export default function App() {
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
         <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
         <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
-        <Route path='/tag/:tagId' element={<TagPage />} />
+        <Route path='/tag/:tagName' element={<TagPage loggedUser={user} handleLogout={handleLogout} liftApiKeywords={liftApiKeywords} />} />
         <Route path='*' element={<Navigate to='/dashboard' />} />
       </Routes>
       );
