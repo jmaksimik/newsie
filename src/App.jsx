@@ -34,12 +34,13 @@ export default function App() {
     console.log('logout successful');
   }
 
-  async function handleAddBookmark(bookmark) {
+  async function addBookmark(bookmark) {
     try {
       const response = await bookmarkApi.create(bookmark);
       setBookmark(response.data);
 
     } catch(err) {
+      console.log(bookmarkApi)
       console.log(err)
       setError('error adding bookmark; check console')
     }
@@ -53,7 +54,15 @@ export default function App() {
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
         <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
         <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
-        <Route path='/tag/:tagName' element={<TagPage loggedUser={user} handleLogout={handleLogout} liftApiKeywords={liftApiKeywords} bookmarkStatus={bookmarkStatus}/>} />
+        <Route path='/tag/:tagName' element={<TagPage 
+                                              loggedUser={user} 
+                                              handleLogout={handleLogout} 
+                                              liftApiKeywords={liftApiKeywords} 
+                                              bookmarkStatus={bookmarkStatus}
+                                              addBookmark={addBookmark}
+                                              
+                                              />} 
+          />
         <Route path='*' element={<Navigate to='/dashboard' />} />
       </Routes>
       );

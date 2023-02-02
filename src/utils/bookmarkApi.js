@@ -1,7 +1,7 @@
 import tokenService from './tokenService';
 const BASE_URL = '/api/bookmarks'
 
-export function create(data) {
+export default function create(data) {
     console.log(data, '<- data passed from clickhandler to utils/bookmarkApi.js')
     return fetch(BASE_URL, {
         body: JSON.stringify(data),
