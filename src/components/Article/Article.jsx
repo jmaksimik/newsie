@@ -2,34 +2,30 @@ import {React, useState} from 'react';
 import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
-export default function Article({article, bookmarkStatus, addBookmark}){
-    const [state, setState] = useState({
-        title: '',
-        url: '',
-        description: '',
-        image: '',
-    })
+import Bookmarks from '../Bookmarks/Bookmarks';
+
+export default function Article({article, bookmarks, addBookmark}){
+ 
 
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    const bookmarkColor = bookmarkStatus ? 'yellow' : 'black';
-    const clickHandler = () => addBookmark(state)
+    const bookmarkIndex = bookmarks.findIndex(bookmark => bookmark.title === article.headline.main)
+    const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
+    console.log(bookmarkIndex);
+
+
 
     async function handleAddBookmark() {
-        setState({
+        const bookmark = {
             title: article.headline.main,
             url: article.web_url,
             description: article.lead_paragraph,
             image: `http://www.nytimes.com/${article.multimedia[3]?.url}`,
-        })
-        return state
+        }
+        addBookmark(bookmark)
     }
 
-
-
-    
-
-
     return (
+        
         <Card key={article._id} raised>
             <Image 
                 src={`http://www.nytimes.com/${article.multimedia[3]?.url}`} 
@@ -43,7 +39,10 @@ export default function Article({article, bookmarkStatus, addBookmark}){
             <Card.Content textAlign={'left'}>
                 {formattedDate} - {article.lead_paragraph}
                 <br></br>
-                <Icon name={'bookmark'} size='large' color={bookmarkColor} onClick={clickHandler} />
+                <Icon name={'bookmark'} 
+                      size='large' 
+                      color={bookmarkColor} 
+                      onClick={handleAddBookmark} />
             </Card.Content>
         </Card>
     )

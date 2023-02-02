@@ -3,7 +3,7 @@ import {Card, Segment} from 'semantic-ui-react';
 
 import Article from '../Article/Article';
 
-export default function ArticleList({nytArticles, bookmarkStatus, addBookmark}){
+export default function ArticleList({nytArticles, bookmarks, bookmarkStatus, addBookmark, bookmarkExists}){
     return (
         <Card.Group itemsPerRow={3} stackable>
             {nytArticles.map((article) => {
@@ -13,6 +13,8 @@ export default function ArticleList({nytArticles, bookmarkStatus, addBookmark}){
                         key={article._id}
                         bookmark={bookmarkStatus}
                         addBookmark={addBookmark}
+                        bookmarkExists={bookmarkExists}
+                        bookmarks={bookmarks}
                     />
                 )
             }

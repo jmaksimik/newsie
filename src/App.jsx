@@ -11,14 +11,18 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import TagPage from './pages/TagPage/TagPage';
 
 import userService from './utils/userService';
-import bookmarkApi from './utils/bookmarkApi';
+import * as bookmarkApi from './utils/bookmarkApi';
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser()) // tries to grab a token if one exists
   const [apiKeywords, setApiKeywords] = useState('')
   const [bookmarks, setBookmark] = useState([])
   const [bookmarkStatus, setBookmarkStatus] = useState(false)
+  
 
+  const bookmarkExists = false
+  
+  
   function liftApiKeywords(keywords){
     setApiKeywords(keywords);
   }
@@ -37,12 +41,12 @@ export default function App() {
   async function addBookmark(bookmark) {
     try {
       const response = await bookmarkApi.create(bookmark);
-      setBookmark(response.data);
+      console.log(response);
+      setBookmark([...bookmarks, response.bookmark]);
 
     } catch(err) {
       console.log(bookmarkApi)
       console.log(err)
-      setError('error adding bookmark; check console')
     }
 
   }
@@ -60,6 +64,8 @@ export default function App() {
                                               liftApiKeywords={liftApiKeywords} 
                                               bookmarkStatus={bookmarkStatus}
                                               addBookmark={addBookmark}
+                                              bookmarkExists={bookmarkExists}
+                                              bookmarks={bookmarks}
                                               
                                               />} 
           />

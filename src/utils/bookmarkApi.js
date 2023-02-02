@@ -1,9 +1,10 @@
 import tokenService from './tokenService';
-const BASE_URL = '/api/bookmarks'
+const BASE_URL = '/api/bookmarks/'
 
-export default function create(data) {
+export function create(data) {
     console.log(data, '<- data passed from clickhandler to utils/bookmarkApi.js')
     return fetch(BASE_URL, {
+        method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Authorization': `Bearer ${tokenService.getToken()}`,
