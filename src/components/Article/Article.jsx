@@ -2,11 +2,9 @@ import {React, useState} from 'react';
 import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
-export default function Article({article}){
-    const [bookmark, setBookmark] = useState(false)
-
+export default function Article({article, bookmarkStatus}){
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    const bookmarkColor = bookmark ? 'yellow' : 'black'
+    const bookmarkColor = bookmarkStatus ? 'yellow' : 'black'
 
     return (
         <Card key={article._id} raised>

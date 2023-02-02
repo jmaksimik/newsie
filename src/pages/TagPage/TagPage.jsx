@@ -7,7 +7,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import ArticleList from '../../components/ArticleList/ArticleList';
 
 
-export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
+export default function TagPage({loggedUser, handleLogout, liftApiKeywords, bookmarkStatus}) {
     const [nytArticles, setNytArticles] = useState([])
     const {tagName} = useParams();
     const pageTitle = tagName.replace('-', ' ').toUpperCase();
@@ -32,7 +32,7 @@ export default function TagPage({loggedUser, handleLogout, liftApiKeywords}) {
         <>
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
         <h1>{pageTitle} LATEST NEWS</h1>
-        <ArticleList nytArticles={nytArticles} />
+        <ArticleList nytArticles={nytArticles} bookmarkStatus={bookmarkStatus} />
         </>
     )
 }

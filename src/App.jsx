@@ -11,10 +11,13 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import TagPage from './pages/TagPage/TagPage';
 
 import userService from './utils/userService';
+import bookmarkApi from './utils/bookmarkApi';
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser()) // tries to grab a token if one exists
   const [apiKeywords, setApiKeywords] = useState('')
+  const [bookmarks, setBookmark] = useState([])
+  const [bookmarkStatus, setBookmarkStatus] = useState(false)
 
   function liftApiKeywords(keywords){
     setApiKeywords(keywords);
@@ -31,6 +34,18 @@ export default function App() {
     console.log('logout successful');
   }
 
+  async function handleAddBookmark(bookmark) {
+    try {
+      const response = await bookmarkApi.create(bookmark);
+      setBookmark(response.data);
+
+    } catch(err) {
+      console.log(err)
+      setError('error adding bookmark; check console')
+    }
+
+  }
+
 
   if (user) {
     return (
@@ -38,7 +53,7 @@ export default function App() {
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
         <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
         <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
-        <Route path='/tag/:tagName' element={<TagPage loggedUser={user} handleLogout={handleLogout} liftApiKeywords={liftApiKeywords} />} />
+        <Route path='/tag/:tagName' element={<TagPage loggedUser={user} handleLogout={handleLogout} liftApiKeywords={liftApiKeywords} bookmarkStatus={bookmarkStatus}/>} />
         <Route path='*' element={<Navigate to='/dashboard' />} />
       </Routes>
       );
