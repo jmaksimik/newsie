@@ -1,14 +1,14 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
-import Bookmarks from '../Bookmarks/Bookmarks';
 
-export default function Article({article, bookmarks, addBookmark}){
+export default function Article({article, bookmarks, addBookmark, getBookmarks}){
  
 
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    const bookmarkIndex = bookmarks.findIndex(bookmark => bookmark.title === article.headline.main)
+    console.log(bookmarks, '<- bookmarks ')
+    const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
     const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
     console.log(bookmarkIndex);
 
@@ -23,6 +23,9 @@ export default function Article({article, bookmarks, addBookmark}){
         }
         addBookmark(bookmark)
     }
+
+
+    
 
     return (
         

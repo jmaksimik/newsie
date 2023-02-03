@@ -8,7 +8,7 @@ import TagList from '../../components/TagList/TagList';
 
 import * as tagAPI from '../../utils/tagApi';
 
-export default function DashboardPage({handleLogout, loggedUser}){
+export default function DashboardPage({handleLogout, loggedUser, getBookmarks}){
     const [tags, setTags] = useState([]);
     const [error, setError] = useState('');
 

@@ -2,7 +2,9 @@ import User from '../models/user.js';
 import Bookmark from '../models/bookmark.js';
 
 export default {
-    create
+    create,
+    deleteBookmark, 
+    index
 };
 
 async function create(req, res) {
@@ -21,4 +23,26 @@ async function create(req, res) {
     }catch(err) {
         res.status(400).json({err});
     }
+}
+
+async function deleteBookmark(req, res) {
+    try {
+        const bookmark = await Bookmark.findOne({'_id': req.params.id})
+        bookmark.remove(req.params.id);
+        await bookmark.save();
+        res.json({data: 'bookmark successfully deleted'})
+    } catch(err) {
+        console.log(err, '<-- error in controller delete function')
+        res.status(400).json({err})
+    }
+}
+
+async function index(req, res) {
+    try {
+        const bookmarks = await Bookmark.findAll().populate('user').exec();
+        res.status(200).json({data: bookmarks});
+    
+    } catch (err) {
+        res.status(400).json({err});
+    } 
 }

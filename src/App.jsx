@@ -18,7 +18,7 @@ export default function App() {
   const [apiKeywords, setApiKeywords] = useState('')
   const [bookmarks, setBookmark] = useState([])
   const [bookmarkStatus, setBookmarkStatus] = useState(false)
-  
+
 
   const bookmarkExists = false
   
@@ -51,13 +51,26 @@ export default function App() {
 
   }
 
+  async function getBookmarks() {
+    try {
+      const response = await bookmarkApi.getAll();
+      console.log(response.data, '<-- bookmarks response before setting to state');
+      setBookmark(response.data)
+    } catch(err) {
+      console.log(err.message, 'error in fetching bookmarks')
+    }
+  }
+
+
+
+
 
   if (user) {
     return (
       <Routes>
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
-        <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} />} />
-        <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} />} />
+        <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} bookmarks={bookmarks} />} />
+        <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} bookmarks={bookmarks} getBookmarks={getBookmarks} />} />
         <Route path='/tag/:tagName' element={<TagPage 
                                               loggedUser={user} 
                                               handleLogout={handleLogout} 
@@ -66,6 +79,7 @@ export default function App() {
                                               addBookmark={addBookmark}
                                               bookmarkExists={bookmarkExists}
                                               bookmarks={bookmarks}
+                                              getBookmarks={getBookmarks}
                                               
                                               />} 
           />

@@ -19,3 +19,26 @@ export function create(data) {
         })
     })
 }
+
+export function deleteBookmark(bookmarkId) {
+    return fetch(`${BASE_URL}${bookmarkId}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${tokenService.getToken()}`
+        }
+    }).then(res => {
+        if(res.ok) return res.json()
+        throw new Error('Error deleating bookmark; issue in utils/bookmarkApi ')
+    })
+}
+
+export function getAll() {
+    return fetch(BASE_URL, {
+        headers: {
+            Authorization: `Bearer ${tokenService.getToken()}`
+        }
+    }).then(res => {
+        if(res.ok) return res.json
+        throw new Error(res, '<- issue here')
+    })
+}
