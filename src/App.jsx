@@ -61,6 +61,16 @@ export default function App() {
     }
   }
 
+  async function removeBookmark(bookmarkId) {
+    try {
+      const response = await bookmarkApi.deleteBookmark(bookmarkId);
+      console.log(response, 'response from bookmarks API');
+      getBookmarks();
+    } catch (err) {
+      console.log(err.message, '<- issue with removing bookmark')
+    }
+  }
+
 
 
 
@@ -80,6 +90,7 @@ export default function App() {
                                               bookmarkExists={bookmarkExists}
                                               bookmarks={bookmarks}
                                               getBookmarks={getBookmarks}
+                                              removeBookmark={removeBookmark}
                                               
                                               />} 
           />

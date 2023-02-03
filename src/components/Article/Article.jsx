@@ -3,7 +3,7 @@ import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
 
-export default function Article({article, bookmarks, addBookmark, getBookmarks}){
+export default function Article({article, removeBookmark, bookmarks, addBookmark, getBookmarks}){
  
 
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
@@ -23,6 +23,9 @@ export default function Article({article, bookmarks, addBookmark, getBookmarks})
         }
         addBookmark(bookmark)
     }
+
+    const clickHandler = bookmarkIndex > -1 ? 
+        () => removeBookmark(bookmarks[bookmarkIndex]._id) : () => handleAddBookmark(article._id)
 
 
     
@@ -45,7 +48,7 @@ export default function Article({article, bookmarks, addBookmark, getBookmarks})
                 <Icon name={'bookmark'} 
                       size='large' 
                       color={bookmarkColor} 
-                      onClick={handleAddBookmark} />
+                      onClick={clickHandler} />
             </Card.Content>
         </Card>
     )

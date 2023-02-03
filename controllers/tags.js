@@ -23,7 +23,7 @@ async function create(req, res) {
 
 async function index(req, res) {
     try {
-        const tags = await Tag.find({}).populate('user').exec();
+        const tags = await Tag.find({user: req.user._id}).populate('user').exec();
         res.status(200).json({data: tags});
     } catch (err) {
         res.status(400).json({err});
