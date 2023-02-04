@@ -6,7 +6,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 import userService from '../../utils/userService';
 
-export default function SignUpPage({handleSignupOrLogin}){
+export default function SignUpPage({handleUserState}){
     // set the state to take input from signup form
     const [state, setState] = useState({
         firstName: '',
@@ -26,7 +26,7 @@ export default function SignUpPage({handleSignupOrLogin}){
         e.preventDefault(); // stop browser from submitting form because we're using SPA
         try {
             await userService.signup(state) // submits state through signup function; standard JSON submission
-            handleSignupOrLogin(); // passed from app.jsx
+            handleUserState(); // passed from app.jsx
             navigate('/dashboard'); 
         
         } catch(err){

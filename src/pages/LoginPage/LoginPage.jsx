@@ -8,7 +8,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import {Button, Form, Grid, Header, Image, Message, Segment} from 'semantic-ui-react';
 
 
-export default function LoginPage({handleSignupOrLogin}){
+export default function LoginPage({handleUserState}){
     const [error, setError] = useState('');
     const [state, setState] = useState({
       email: '',
@@ -28,7 +28,7 @@ export default function LoginPage({handleSignupOrLogin}){
 
       try {
         await userService.login(state);
-        handleSignupOrLogin();
+        handleUserState();
         navigate('/dashboard')
 
       } catch(err) {

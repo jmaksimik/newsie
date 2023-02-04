@@ -27,7 +27,7 @@ export default function App() {
     setApiKeywords(keywords);
   }
 
-  function handleSignupOrLogin() {
+  function handleUserState() {
     console.log('signup/login handler running');
     setUser(userService.getUser()); // gets JWT from localstorage and decodes it
   }
@@ -100,9 +100,9 @@ export default function App() {
     }
       return (
         <Routes>
-        <Route path='/' element={<LandingPage loggedUser={user} handleSignupOrLogin={handleSignupOrLogin} />} />
-        <Route path='/login' element={<LoginPage handleSignupOrLogin={handleSignupOrLogin} />} />
-        <Route path='/signup' element={<SignUpPage handleSignupOrLogin={handleSignupOrLogin} />} />
+        <Route path='/' element={<LandingPage loggedUser={user} handleUserState={handleUserState} />} />
+        <Route path='/login' element={<LoginPage handleUserState={handleUserState} />} />
+        <Route path='/signup' element={<SignUpPage handleUserState={handleUserState} />} />
         
         
         <Route path='*' element={<Navigate to='/' />} />
