@@ -19,7 +19,7 @@ export default function Article({article, removeBookmark, bookmarks, addBookmark
             title: article.headline.main,
             url: article.web_url,
             description: article.lead_paragraph,
-            image: `http://www.nytimes.com/${article.multimedia[3]?.url}`,
+            image: `http://www.nytimes.com/${article.multimedia[3]?.url}`
         }
         addBookmark(bookmark)
     }

@@ -80,7 +80,7 @@ export default function App() {
       <Routes>
         <Route path='/dashboard' element={<DashboardPage handleLogout={handleLogout} loggedUser={user} />} />
         <Route path='/profile' element={<ProfilePage loggedUser={user} handleLogout={handleLogout} bookmarks={bookmarks} />} />
-        <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} bookmarks={bookmarks} getBookmarks={getBookmarks} />} />
+        <Route path='/bookmarks' element={<BookmarkPage loggedUser={user} handleLogout={handleLogout} bookmarks={bookmarks} getBookmarks={getBookmarks} removeBookmarks={removeBookmark} />} />
         <Route path='/tag/:tagName' element={<TagPage 
                                               loggedUser={user} 
                                               handleLogout={handleLogout} 
