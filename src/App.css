@@ -1,1 +1,10 @@
+.landing-title {
+    background-color: teal;
+    color: white;
+    width: 100vw;
+    vertical-align: middle;
+}
 
+.landing-list {
+    margin: 2em 0 2em 0; 
+}
