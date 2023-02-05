@@ -14,7 +14,7 @@ export default function TagPage({loggedUser, handleLogout, removeBookmark, liftA
 
     useEffect(() => {
         liftApiKeywords(tagName);
-        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
+        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&facet_fields=day_of_week&facet=true&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
 
         async function makeApiCall() {
             try{

@@ -11,6 +11,7 @@ export default function BookmarkPage({loggedUser, addBookmark, handleLogout, boo
     return (
         <>
             <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
+            <h1>My Bookmarks</h1>
             <BookmarkList bookmarks={bookmarks} getBookmarks={getBookmarks} removeBookmark={removeBookmark} />
         </>
     )

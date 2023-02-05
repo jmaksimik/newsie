@@ -6,7 +6,14 @@ export default function LandingPage({ handleUserState, loggedUser }) {
     return (
         <>
             <PageHeader loggedUser={loggedUser} />
-            <h1>Landing Page</h1>
+            <div class='ui inverted vertical masthead center aligned segment'>
+                <div class='ui text container'>
+                    <h1>Welcome to Newsie!</h1>
+                    <h2>Follow What Matters to You</h2>
+                </div>
+
+            </div>
+
         </>
     );
 }

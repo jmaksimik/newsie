@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {Form, Button} from 'semantic-ui-react';
-import {Link, useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Form, Button } from 'semantic-ui-react';
+import { Link, useNavigate } from 'react-router-dom'
 
 import tokenService from '../../utils/tokenService';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
-export default function ProfilePage({loggedUser, handleLogout}){
+export default function ProfilePage({ loggedUser, handleLogout, handleUserState }) {
     const [state, setState] = useState({
         firstName: loggedUser.firstName,
         lastName: loggedUser.lastName,
@@ -14,8 +14,25 @@ export default function ProfilePage({loggedUser, handleLogout}){
         password: loggedUser.password,
         passwordConf: ''
     })
+
+    const navigate = useNavigate();
+
+    function generateToken(token) {
+        tokenService.setToken(token)
+        tokenService.getToken()
+        tokenService.getUserFromToken();
+    }
+
     function handleSubmit(e) {
-        return;
+        e.preventDefault();
+        try {
+            
+            generateToken();
+            navigate('/profile');
+        } catch (err) {
+            console.log(err, 'error in updating profile')
+        }
+
     }
 
     function handleChange(e) {
@@ -35,21 +52,20 @@ export default function ProfilePage({loggedUser, handleLogout}){
                     placeholder='First Name'
                     value={state.firstName}
                     onChange={handleChange}
-                    required
+
                 />
-                <Form.Input 
+                <Form.Input
                     name='lastName'
                     placeholder='Last Name'
                     value={state.lastName}
                     onChange={handleChange}
-                    required
+
                 />
                 <Form.Input
                     name='email'
                     placeholder='Email'
                     value={state.email}
                     onChange={handleChange}
-                    required
                 />
                 <Form.Input
                     name='password'
@@ -57,7 +73,7 @@ export default function ProfilePage({loggedUser, handleLogout}){
                     type='password'
                     value={state.password}
                     onChange={handleChange}
-                    required
+
                 />
                 <Form.Input
                     name='passwordConf'
@@ -65,14 +81,14 @@ export default function ProfilePage({loggedUser, handleLogout}){
                     type='password'
                     value={state.passwordConf}
                     onChange={handleChange}
-                    required
+
                 />
                 <Button type='submit' className='btn'>
                     Save
                 </Button>
                 <Link to='/dashboard'>Cancel</Link>
             </Form>
-            
+
         </>
     );
 }
