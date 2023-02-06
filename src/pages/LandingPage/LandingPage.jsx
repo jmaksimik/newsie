@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 
 import PageHeader from '../../components/PageHeader/PageHeader';
-import ImageCarousel from '../../components/ImageCarousel/ImageCarousel';
+import Carousel from '../../components/Carousel/Carousel';
 
 export default function LandingPage({ handleUserState, loggedUser }) {
     return (
