@@ -13,6 +13,7 @@ export default function AddTagForm({handleAddTag}) {
         e.preventDefault();
         console.log(title, '<- var title passed to handleAddTag in AddTagForm.jsx')
         handleAddTag(title);
+        setTitle('')
     }
 
     return (

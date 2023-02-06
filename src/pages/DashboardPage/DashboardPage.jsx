@@ -73,7 +73,7 @@ export default function DashboardPage({ handleLogout, loggedUser, getBookmarks, 
                 textAlign='center'    
             >
                 <Grid.Column style={{maxWidth: 900}}>
-                    <h1>Dashboard Page</h1>
+                    <h1> My Dashboard</h1>
                     <AddTagForm handleAddTag={handleAddTag} />
                     <TagList
                         tags={tags}

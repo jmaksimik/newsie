@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Grid } from 'semantic-ui-react';
 import { Link, useNavigate } from 'react-router-dom'
 
 import tokenService from '../../utils/tokenService';
@@ -26,7 +26,7 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
     function handleSubmit(e) {
         e.preventDefault();
         try {
-            
+
             generateToken();
             navigate('/profile');
         } catch (err) {
@@ -45,49 +45,57 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
     return (
         <>
             <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
-            <h1>Profile Page</h1>
-            <Form autoComplete='off' onSubmit={handleSubmit}>
-                <Form.Input
-                    name='firstName'
-                    placeholder='First Name'
-                    value={state.firstName}
-                    onChange={handleChange}
+            <Grid 
+                textAlign='center'
+                style={{height: '100vh', width: '100vw'}}
+            >
+                <Grid.Column style={{maxWidth: 450}}>
+                    <h1>Edit My Details</h1>
+                    <Form autoComplete='off' onSubmit={handleSubmit}>
+                        <Form.Input
+                            name='firstName'
+                            placeholder='First Name'
+                            value={state.firstName}
+                            onChange={handleChange}
 
-                />
-                <Form.Input
-                    name='lastName'
-                    placeholder='Last Name'
-                    value={state.lastName}
-                    onChange={handleChange}
+                        />
+                        <Form.Input
+                            name='lastName'
+                            placeholder='Last Name'
+                            value={state.lastName}
+                            onChange={handleChange}
 
-                />
-                <Form.Input
-                    name='email'
-                    placeholder='Email'
-                    value={state.email}
-                    onChange={handleChange}
-                />
-                <Form.Input
-                    name='password'
-                    placeholder='Update Password'
-                    type='password'
-                    value={state.password}
-                    onChange={handleChange}
+                        />
+                        <Form.Input
+                            name='email'
+                            placeholder='Email'
+                            value={state.email}
+                            onChange={handleChange}
+                        />
+                        <Form.Input
+                            name='password'
+                            placeholder='Update Password'
+                            type='password'
+                            value={state.password}
+                            onChange={handleChange}
 
-                />
-                <Form.Input
-                    name='passwordConf'
-                    placeholder='Confirm Password Change'
-                    type='password'
-                    value={state.passwordConf}
-                    onChange={handleChange}
+                        />
+                        <Form.Input
+                            name='passwordConf'
+                            placeholder='Confirm Password Change'
+                            type='password'
+                            value={state.passwordConf}
+                            onChange={handleChange}
 
-                />
-                <Button type='submit' className='btn'>
-                    Save
-                </Button>
-                <Link to='/dashboard'>Cancel</Link>
-            </Form>
+                        />
+                        <Button type='submit' className='btn'>
+                            Save
+                        </Button>
+                        <Link to='/dashboard'>Cancel</Link>
+                    </Form>
+
+                </Grid.Column>
+            </Grid>
 
         </>
     );
