@@ -16,12 +16,12 @@ export default function LandingPage({ handleUserState, loggedUser }) {
                 verticalAlign='top'
                 >
                 <Grid.Column>
-                    <div className='landing-title'>
+                    <div className='landing-title' size='huge'>
                         <h1>Welcome to Newsie!</h1>
                         <h2>Follow What Matters to You</h2>
                     </div>
                 <div className='landing-list'>
-                     <List bulleted as='h3' size='big'>
+                     <List bulleted size='large'>
                         <List.Item>Search Articles Across the Web</List.Item>
                         <List.Item>Customize Topics to Follow</List.Item>
                         <List.Item>Easily Access Your Categories for Future Reference</List.Item>

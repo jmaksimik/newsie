@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import {useParams} from 'react-router-dom';
-
+import {Grid} from 'semantic-ui-react';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ArticleList from '../../components/ArticleList/ArticleList';
@@ -14,7 +14,7 @@ export default function TagPage({loggedUser, handleLogout, removeBookmark, liftA
 
     useEffect(() => {
         liftApiKeywords(tagName);
-        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&facet_fields=day_of_week&facet=true&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
+        let nytURL= `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&sort=newest&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
 
         async function makeApiCall() {
             try{
@@ -32,8 +32,20 @@ export default function TagPage({loggedUser, handleLogout, removeBookmark, liftA
     return (
         <>
         <PageHeader loggedUser={loggedUser} handleLogout={handleLogout} />
-        <h1>{pageTitle} LATEST NEWS</h1>
-        <ArticleList nytArticles={nytArticles} removeBookmark={removeBookmark} bookmarkStatus={bookmarkStatus} addBookmark={addBookmark} bookmarkExists={bookmarkExists} bookmarks={bookmarks} getBookmarks={getBookmarks} />
+        <Grid textAlign='center'>
+            <Grid.Column style={{maxWidth: 900}}>
+                <h1>{pageTitle} LATEST NEWS</h1>
+                <ArticleList 
+                    nytArticles={nytArticles} 
+                    removeBookmark={removeBookmark} 
+                    bookmarkStatus={bookmarkStatus} 
+                    addBookmark={addBookmark} 
+                    bookmarkExists={bookmarkExists} 
+                    bookmarks={bookmarks} 
+                    getBookmarks={getBookmarks} />
+            </Grid.Column>
+        </Grid>
+        
         </>
     )
 }
