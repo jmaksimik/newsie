@@ -108,8 +108,8 @@ export default function App() {
       return (
         <Routes>
         <Route path='/' element={<LandingPage loggedUser={user} handleUserState={handleUserState} />} />
-        <Route path='/login' element={<LoginPage handleUserState={handleUserState} />} />
-        <Route path='/signup' element={<SignUpPage handleUserState={handleUserState} />} />
+        <Route path='/login' element={<LoginPage handleUserState={handleUserState} loggedUser={user} />} />
+        <Route path='/signup' element={<SignUpPage handleUserState={handleUserState} loggedUser={user} />} />
         
         
         <Route path='*' element={<Navigate to='/' />} />

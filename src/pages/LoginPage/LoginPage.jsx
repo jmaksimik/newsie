@@ -4,11 +4,12 @@ import './LoginPage.css';
 
 import userService from '../../utils/userService';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import PageHeader from '../../components/PageHeader/PageHeader';
 
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 
 
-export default function LoginPage({ handleUserState }) {
+export default function LoginPage({ handleUserState, loggedUser }) {
   const [error, setError] = useState('');
   const [state, setState] = useState({
     email: '',
@@ -38,6 +39,7 @@ export default function LoginPage({ handleUserState }) {
 
   return (
     <>
+      <PageHeader loggedUser={loggedUser} />
       <Grid
         textAlign='center'
         style={{ height: '100vh', width: '100vw' }}
