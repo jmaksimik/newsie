@@ -4,7 +4,7 @@
 Newsie is a news aggregation application where users can customize keywords to follow. Customized feed pages will then be avaiable to view all recent stories related to those topics.
 The idea came from typical news aggregation services one may encounter, like Apple News. The key value-add is the ability to narrow down by specific topics of interest, rather than general categories (like Sports, News, Foreign Affairs, etc.).
 ## Signup & Login
-<img src='https://imgur.com/0LGs0Zn.jpg'>
+<img src='https://imgur.com/n4MMTRm.jpg'>
 Signing up is free! You just need to provide your name, email, and a password (otherwise, there wouldn't be a way to save your tags!)
 <img src='https://imgur.com/xvL0Wfk.jpg'>
 If you're returning to the site, navigate to the Login Screen instead by clicking 'Log In' in the static header.
@@ -32,6 +32,10 @@ You can edit your personal details here. You can update any piece of information
 - CSS
 - Semantic UI React
 - EJS
+- Node.js
+- MongoDB
+- Express
+- Mongoose
 
 ## Get Started
 - You can view my project planning board on Trello [here](https://trello.com/b/mIstvbAR/newsie). This includes user stories, icebox features, my ERD, and wireframes.
