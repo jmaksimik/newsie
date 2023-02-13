@@ -1,10 +1,11 @@
 import React from 'react';
-import { Grid, Image, List, Button } from 'semantic-ui-react';
+import { Grid, List, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import Slideshow from '../../components/Slideshow/Slideshow';
+import LandingFooter from '../../components/LandingFooter/LandingFooter';
 
 
 
@@ -21,13 +22,13 @@ export default function LandingPage({ handleUserState, loggedUser }) {
                     <Slideshow />
                     <Grid.Row>
                         <div className='landing-title' size='huge'>
-                            <h1>Welcome to Newsie!</h1>
+                            <h1 id='title'>Welcome to Newsie!</h1>
                             <h2>Follow What Matters to You</h2>
                         </div>
                     </Grid.Row>
                     <Grid.Row>
                         <div className='landing-list'>
-                            <List bulleted size='large'>
+                            <List bulleted size='huge'>
                                 <List.Item>Search Articles Across the Web</List.Item>
                                 <List.Item>Customize Topics to Follow</List.Item>
                                 <List.Item>Easily Access Your Categories for Future Reference</List.Item>
@@ -44,14 +45,13 @@ export default function LandingPage({ handleUserState, loggedUser }) {
                             </Button>
                         </Link>
                     </Grid.Row>
-
-
-
-
+                    &nbsp;
+                    &nbsp;
+                    <Grid.Row>
+                        <LandingFooter />
+                    </Grid.Row>
                 </Grid.Column>
             </Grid>
-
-
 
         </>
     );
