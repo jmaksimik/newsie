@@ -21,7 +21,7 @@ export default function Bookmarks({bookmarks, removeBookmark}) {
             </Card.Header>
         </a>
         <Card.Content textAlign={'left'}>
-            Added: {formattedDate}
+           <span style={{fontWeight: 'bold'}}>Added: {formattedDate} </span> 
             <br></br>
             {bookmarks.description}
             <br></br>
