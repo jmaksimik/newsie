@@ -5,3 +5,22 @@
 .landing-list {
     margin: 2em 0 2em 0; 
 }
+
+.slideshow {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100vw;
+    max-height: 80vh;
+}
+
+.slideshowSlider {
+    white-space: nowrap;
+    transition: ease 1000ms;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
