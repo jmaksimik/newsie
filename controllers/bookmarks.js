@@ -39,7 +39,7 @@ async function deleteBookmark(req, res) {
 
 async function index(req, res) {
     try {
-        const bookmarks = await Bookmark.find({}).populate('user').exec();
+        const bookmarks = await Bookmark.find({user: req.user._id}).populate('user').exec();
         res.status(201).json({data: bookmarks});
     
     } catch (err) {
