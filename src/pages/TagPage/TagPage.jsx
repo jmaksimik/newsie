@@ -19,7 +19,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
     useEffect(() => {
         liftApiKeywords(tagName);
         let nytURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${tagName}&sort=newest&api-key=RPBVKJx9BvLEOAcgjyFJYW3axTX2Ox1A`
-        let guardianURL = `https://content.guardianapis.com/search?q=${guardianKeyWords}&api-key=d12eebf2-426a-4265-b2f9-42fb638338ad&show-fields=thumbnail&type=article`
+        let guardianURL = `https://content.guardianapis.com/search?q=${guardianKeyWords}&api-key=d12eebf2-426a-4265-b2f9-42fb638338ad&show-fields=all&type=article`
 
         async function makeApiCall() {
             try {
@@ -28,7 +28,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                 const nytData = await nytResponseJSON.json();
                 const guardianData = await guardianResponseJSON.json();
                 setNytArticles(nytData.response.docs);
-                setGuardianArticles(guardianData);
+                setGuardianArticles(guardianData.response.results);
             } catch (err) {
                 console.log(err)
             }
@@ -45,13 +45,14 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                     <h1>{pageTitle} LATEST NEWS</h1>
                     <ArticleList
                         nytArticles={nytArticles}
+                        guardianArticles={guardianArticles}
                         removeBookmark={removeBookmark}
                         bookmarkStatus={bookmarkStatus}
                         addBookmark={addBookmark}
                         bookmarkExists={bookmarkExists}
                         bookmarks={bookmarks}
                         getBookmarks={getBookmarks}
-                        guardianArticles={guardianArticles} />
+                    />
                 </Grid.Column>
             </Grid>
 

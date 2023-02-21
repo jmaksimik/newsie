@@ -3,23 +3,21 @@ import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
 
-export default function Article({article, removeBookmark, bookmarks, addBookmark, getBookmarks}){
+export default function GuardianArticle({article, removeBookmark, bookmarks, addBookmark, getBookmarks}){
  
 
-    const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    console.log(bookmarks, '<- bookmarks ')
-    const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
+    const formattedDate = format(new Date(article.webPublicationDate), 'MM/dd/yyyy ')
+    const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.webTitle)
     const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
-    console.log(bookmarkIndex);
 
 
 
     async function handleAddBookmark() {
         const bookmark = {
-            title: article.headline.main,
-            url: article.web_url,
-            description: article.lead_paragraph,
-            image: `http://www.nytimes.com/${article.multimedia[3]?.url}`,
+            title: article.webTitle,
+            url: article.webUrl,
+            description: article.fields.trailText,
+            image: article.fields.thumbnail,
         }
         addBookmark(bookmark)
     }
@@ -34,16 +32,16 @@ export default function Article({article, removeBookmark, bookmarks, addBookmark
         
         <Card key={article._id} raised>
             <Image 
-                src={`http://www.nytimes.com/${article.multimedia[0]?.url}`} 
+                src={article.fields.thumbnail} 
                 size='large'
             />
-            <a href={article.web_url}>
+            <a href={article.webUrl}>
                 <Card.Header as='h2'>
-                    {article.headline.main}
+                    {article.webTitle}
                 </Card.Header>
              </a> 
             <Card.Content textAlign={'left'}>
-                {formattedDate} - {article.lead_paragraph}
+                {formattedDate} - {article.fields.trailText}
                 <br></br>
                 <Icon name={'bookmark'} 
                       size='large' 
