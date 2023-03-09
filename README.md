@@ -39,6 +39,7 @@ You can edit your personal details here. You can update any piece of information
 
 ## Get Started
 - You can view my project planning board on Trello [here](https://trello.com/b/mIstvbAR/newsie). This includes user stories, icebox features, my ERD, and wireframes.
+- You can access my app and sign up [here](https://newsie.cyclic.app).
 
 ## Next Steps
 There is a lot I want to do to continue working on this project:
