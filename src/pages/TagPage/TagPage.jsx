@@ -46,15 +46,23 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
         async function combineArticles(){
             try{
                 const joinedArticles = [...nytArticles, ...guardianArticles]
-                console.log(joinedArticles, '<- joined articles'); // checking to make sure the data is being successfully combined
+                let currentIndex = joinedArticles.length, randomIndex;
 
+                while (currentIndex != 0){
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
 
-
+                    [joinedArticles[currentIndex], joinedArticles[randomIndex]] = 
+                    [joinedArticles[randomIndex], joinedArticles[currentIndex]]
+                }
+                console.log(joinedArticles, '<- joined articles post-shuffle ')
+                return joinedArticles
 
             } catch (err) {
                 console.log(err)
             }
         }
+
         makeApiCall();
         assignPublisher();
         combineArticles();

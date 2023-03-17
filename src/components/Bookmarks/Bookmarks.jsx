@@ -5,7 +5,6 @@ import format from 'date-fns/format';
 
 export default function Bookmarks({bookmarks, removeBookmark}) {
     const formattedDate = format(new Date(bookmarks.createdAt), 'MM/dd/yyy');
-    console.log(bookmarks, '<- bookmarks in bookmarks.jsx');
     
     const clickHandler = () => removeBookmark(bookmarks._id);
 
