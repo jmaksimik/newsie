@@ -7,10 +7,8 @@ export default function NYTArticle({article, removeBookmark, bookmarks, addBookm
  
 
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    console.log(bookmarks, '<- bookmarks ')
     const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
     const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
-    console.log(bookmarkIndex);
 
 
 

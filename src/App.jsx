@@ -54,7 +54,6 @@ export default function App() {
   async function getBookmarks() {
     try {
       const response = await bookmarkApi.getAll();
-      console.log(response.data, '<-- bookmarks response before setting to state');
       setBookmark(response.data)
     } catch(err) {
       console.log(err.message, 'error in fetching bookmarks')

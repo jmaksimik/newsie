@@ -33,8 +33,33 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                 console.log(err)
             }
         }
+
+        async function assignPublisher(){
+            nytArticles.forEach(article => {
+                article.publisher = 'nyt';
+            })
+            guardianArticles.forEach(article => {
+                article.publisher = 'guardian'
+            })
+        }
+
+        async function combineArticles(){
+            try{
+                const joinedArticles = [...nytArticles, ...guardianArticles]
+                console.log(joinedArticles, '<- joined articles'); // checking to make sure the data is being successfully combined
+
+
+
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
         makeApiCall();
+        assignPublisher();
+        combineArticles();
         getBookmarks();
+
     }, [])
 
     return (
