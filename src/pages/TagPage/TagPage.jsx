@@ -23,30 +23,49 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
 
         async function makeApiCall() {
             try {
-                const nytResponseJSON = await fetch(nytURL);
-                const guardianResponseJSON = await fetch(guardianURL);
-                const nytData = await nytResponseJSON.json();
-                const guardianData = await guardianResponseJSON.json();
-                setNytArticles(nytData.response.docs);
-                setGuardianArticles(guardianData.response.results);
+                const nytResponseJSON = await fetch(nytURL)
+                .then(res => {
+                    const nytData = res.json();
+                    return nytData
+                })
+                .then(res => {
+                    return setNytArticles(res.response.docs)
+                })
+                .then(res => {
+                    nytArticles.forEach(article => {
+                        article.publisher = 'nyt';
+                    })
+                })
+                .then(res => {
+                    console.log(nytArticles, 'nyt articles set')
+                })
+                
+                const guardianResponseJSON =  await fetch(guardianURL)
+                .then(res => {
+                    const guardianData = res.json();
+                    return guardianData
+                })
+                .then(res => {
+                    return setGuardianArticles(res.response.results)
+                })
+                .then(res => {
+                    guardianArticles.forEach(article => {
+                        article.publisher = 'guardian'
+                    })
+                })
+                .then(res => {
+                    console.log(guardianArticles, 'guardian articles set')
+                })
             } catch (err) {
-                console.log(err)
+                console.log('error making api call =>', err)
             }
         }
 
-        async function assignPublisher(){
-            nytArticles.forEach(article => {
-                article.publisher = 'nyt';
-            })
-            guardianArticles.forEach(article => {
-                article.publisher = 'guardian'
-            })
-        }
-
-        async function combineArticles(){
+        function combineArticles(){
             try{
                 const joinedArticles = [...nytArticles, ...guardianArticles]
                 let currentIndex = joinedArticles.length, randomIndex;
+
 
                 while (currentIndex != 0){
                     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -55,16 +74,15 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                     [joinedArticles[currentIndex], joinedArticles[randomIndex]] = 
                     [joinedArticles[randomIndex], joinedArticles[currentIndex]]
                 }
-                console.log(joinedArticles, '<- joined articles post-shuffle ')
+                console.log('articles have been joined')
+                console.log(joinedArticles)
                 return joinedArticles
-
             } catch (err) {
                 console.log(err)
             }
         }
 
         makeApiCall();
-        assignPublisher();
         combineArticles();
         getBookmarks();
 
