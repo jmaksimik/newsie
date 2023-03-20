@@ -47,8 +47,11 @@ function updateUser(user){
   console.log(user)
   return fetch(BASE_URL + 'update', {
     method: 'PUT',
-    headers: new Headers({'Content-Type': 'application/json'}),
-    body: JSON.stringify(user) 
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    },
+    body: JSON.stringify(user)
   })
   .then(res => {
     if (res.ok) return res.json();

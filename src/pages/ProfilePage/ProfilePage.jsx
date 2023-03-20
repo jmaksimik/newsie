@@ -12,17 +12,20 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
         lastName: loggedUser.lastName,
         email: loggedUser.email,
         password: loggedUser.password,
-        passwordConf: ''
+        passwordConf: loggedUser.password
     })
 
     const navigate = useNavigate();
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         try {
-            userService.updateUser(state)
-            handleUserState();
-            navigate('/profile')
+            if (state.password == state.passwordConf){
+                userService.updateUser(state);
+                navigate('/profile')
+            } else {
+                throw new Error("Passwords don't match!")
+            }
         } catch (err) {
             console.log(err, 'error in updating profile')
         }
@@ -72,6 +75,7 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
                             type='password'
                             value={state.password}
                             onChange={handleChange}
+                            default=''
 
                         />
                         <Form.Input
@@ -80,7 +84,7 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
                             type='password'
                             value={state.passwordConf}
                             onChange={handleChange}
-
+                            default=''
                         />
                         <Button type='submit' className='btn'>
                             Save

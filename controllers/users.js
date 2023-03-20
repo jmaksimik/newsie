@@ -46,15 +46,18 @@ async function login(req, res) {
 }
 
 async function update(req, res) {
+  console.log('update function firing')
   try {
-    User.findOne({ 'user._id': req.params.id }, function (err, user) {
-      console.log(user, '<- updated user in controller function')
+    console.log(req.body, '<-- req.body')
+    User.findById(req.user._id, function (err, user) {
       user.firstName = req.body.firstName;
       user.lastName = req.body.lastName;
       user.email = req.body.email;
-      if (req.body.password && req.body.password == req.body.comparePassword) {
+      if (req.body.password) {
         user.password = req.body.password
       }
+      user.save()
+      console.log(user, '<- user')
       const token = createJWT(user);
       res.json({token})
     })
