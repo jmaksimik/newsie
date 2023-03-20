@@ -31,7 +31,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                 .then(res => {
                     return setNytArticles(res.response.docs)
                 })
-                .then(res => {
+                .then(res => {                          // adding publisher designation for later filtering
                     nytArticles.forEach(article => {
                         article.publisher = 'nyt';
                     })
@@ -61,7 +61,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
             }
         }
 
-        function combineArticles(){
+        function combineArticles(){                     // combining articles into a single array to be filtered on render
             try{
                 const joinedArticles = [...nytArticles, ...guardianArticles]
                 let currentIndex = joinedArticles.length, randomIndex;

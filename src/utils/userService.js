@@ -1,3 +1,4 @@
+import { json } from 'react-router-dom';
 import tokenService from './tokenService';
 
 const BASE_URL = '/api/users/';
@@ -42,9 +43,24 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
+function updateUser(user){
+  console.log(user)
+  return fetch(BASE_URL + 'update', {
+    method: 'PUT',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(user) 
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Error in updating profile')
+  })
+  .then(({token}) => tokenService.setToken(token));
+}
+
 export default {
   signup, 
   getUser,
   logout,
-  login
+  login,
+  updateUser
 };
