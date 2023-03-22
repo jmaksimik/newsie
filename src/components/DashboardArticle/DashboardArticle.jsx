@@ -1,10 +1,10 @@
-import {React, useState, useEffect} from 'react';
-import {Card, Image, Icon} from 'semantic-ui-react';
+import { React, useState, useEffect } from 'react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 import format from 'date-fns/format';
 
 
-export default function DashboardArticle({article, removeBookmark, bookmarks, addBookmark, getBookmarks}){
- 
+export default function DashboardArticle({ article, removeBookmark, bookmarks, addBookmark, getBookmarks }) {
+
 
     const formattedDate = format(new Date(article.published_date), 'MM/dd/yyyy ')
     console.log(bookmarks, '<- bookmarks ')
@@ -24,31 +24,33 @@ export default function DashboardArticle({article, removeBookmark, bookmarks, ad
         addBookmark(bookmark)
     }
 
-    const clickHandler = bookmarkIndex > -1 ? 
+    const clickHandler = bookmarkIndex > -1 ?
         () => removeBookmark(bookmarks[bookmarkIndex]._id) : () => handleAddBookmark(article._id)
 
 
-    
+
 
     return (
-        
+
         <Card key={article._id} raised>
-            <Image 
-                src={`${article.multimedia[1]?.url}`} 
-                size='large'
-            />
+            {article.multimedia &&
+                <Image
+                    src={`${article.multimedia[1]?.url}`}
+                    size='large'
+                />
+            }
             <a href={article.url}>
                 <Card.Header as='h2'>
                     {article.title}
                 </Card.Header>
-             </a> 
+            </a>
             <Card.Content textAlign={'left'}>
                 {formattedDate} - {article.abstract}
                 <br></br>
-                <Icon name={'bookmark'} 
-                      size='large' 
-                      color={bookmarkColor} 
-                      onClick={clickHandler} />
+                <Icon name={'bookmark'}
+                    size='large'
+                    color={bookmarkColor}
+                    onClick={clickHandler} />
             </Card.Content>
         </Card>
     )
