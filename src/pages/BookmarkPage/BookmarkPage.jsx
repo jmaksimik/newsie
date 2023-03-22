@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import BookmarkList from '../../components/BookmarkList/BookmarkList';
 import {Grid} from 'semantic-ui-react';
 
-export default function BookmarkPage({loggedUser, addBookmark, handleLogout, bookmarks, getBookmarks, removeBookmark}){
+export default function BookmarkPage({loggedUser, handleLogout, bookmarks, getBookmarks, removeBookmark}){
     useEffect(() => {
         getBookmarks();
     }, [])

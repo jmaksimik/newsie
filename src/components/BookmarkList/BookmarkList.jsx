@@ -10,7 +10,6 @@ export default function BookmarkList({bookmarks, getBookmarks, removeBookmark}){
                 return(
                     <Bookmarks 
                                bookmarks={bookmark} 
-                               getBookmarks={getBookmarks} 
                                removeBookmark={removeBookmark}
                                key={bookmark._id}
                     
