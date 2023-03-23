@@ -11,10 +11,13 @@ import ArticleList from '../../components/ArticleList/ArticleList';
 export default function TagPage({ loggedUser, handleLogout, removeBookmark, liftApiKeywords, bookmarkStatus, addBookmark, bookmarkExists, bookmarks, getBookmarks }) {
     const [nytArticles, setNytArticles] = useState([])
     const [guardianArticles, setGuardianArticles] = useState([]);
+    const [joinedArticles, setJoinedArticles] = useState();
+
     const { tagName } = useParams();
+
     const pageTitle = tagName.replace('-', ' ').toUpperCase();
     const guardianKeyWords = tagName.replace('-', '%20AND%20')
-    
+
 
     useEffect(() => {
         liftApiKeywords(tagName);
@@ -23,62 +26,73 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
 
         async function makeApiCall() {
             try {
-                await fetch(nytURL)
-                .then(res => {
-                    return res.json();
-                })
-                .then(res => {
-                    return setNytArticles(res.response.docs)
-                })
-                .then(() => {                          // adding publisher designation for later filtering
-                    nytArticles.forEach(article => {
-                        article.publisher = 'nyt';
+                    fetch(nytURL)
+                    .then(res => {
+                        const nytData = res.json();
+                        return nytData  
                     })
-                })
-          
-                await fetch(guardianURL)
-                .then(res => {
-                    return res.json();
-                })
-                .then(res => {
-                    return setGuardianArticles(res.response.results)
-                })
-                .then(() => {
-                    guardianArticles.forEach(article => {
-                        article.publisher = 'guardian'
+                    .then(nytData => {
+                        return setNytArticles(nytData.response.docs);
                     })
-                })
+
+                     fetch(guardianURL)
+                    .then(res => {
+                        const guardianData = res.json();
+                        return guardianData
+                    })
+                    .then(guardianData => {
+                        return setGuardianArticles(guardianData.response.results)
+                    })
             } catch (err) {
                 console.log('error making api call =>', err)
             }
         }
 
-        function combineArticles(){                     // combining articles into a single array to be filtered on render
-            try{
-                const joinedArticles = [...nytArticles, ...guardianArticles]
-                let currentIndex = joinedArticles.length, randomIndex;
+
+        // .then(res => {
+        //     setNytArticles(res.response.docs)
+        // })
+        // .then(() => {                          // adding publisher designation for later filtering
+        //     nytArticles.forEach(article => {
+        //         article.publisher = 'nyt';
+        //     })
+        // })
+
+        // await fetch(guardianURL)
+        // .then(res => {
+        //     return res.json();
+        // })
+        // .then(res => {
+        //     return setGuardianArticles(res.response.results)
+        // })
+        // .then(() => {
+        //     guardianArticles.forEach(article => {
+        //         article.publisher = 'guardian';
+        //     })
+        // })
 
 
-                while (currentIndex != 0){
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
 
-                    [joinedArticles[currentIndex], joinedArticles[randomIndex]] = 
-                    [joinedArticles[randomIndex], joinedArticles[currentIndex]]
-                }
-                console.log('articles have been joined')
-                console.log(joinedArticles)
-                return joinedArticles
-            } catch (err) {
-                console.log(err)
-            }
-        }
 
         makeApiCall();
-        combineArticles();
         getBookmarks();
-
     }, [])
+
+    useEffect(() => {
+        function combineArticles() {                     // combining articles into a single array to be filtered on render
+            try {
+                    console.log(nytArticles, '<- nytArticles when combineArticles fires')
+                    console.log(guardianArticles, '<- guardianArticles when combineArticles fires')
+                    const joinedArray = [...nytArticles, ...guardianArticles];
+                    console.log('articles have been joined');
+                    return setJoinedArticles(joinedArray);
+            } catch (err) {
+                console.log( 'error setting joined array =>',err)
+            }
+        } 
+
+        combineArticles();
+    }, [nytArticles])
 
     return (
         <>
@@ -95,6 +109,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
                         bookmarkExists={bookmarkExists}
                         bookmarks={bookmarks}
                         getBookmarks={getBookmarks}
+                        joinedArticles={joinedArticles}
                     />
                 </Grid.Column>
             </Grid>
