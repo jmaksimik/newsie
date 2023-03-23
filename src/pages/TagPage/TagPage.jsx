@@ -23,38 +23,30 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, lift
 
         async function makeApiCall() {
             try {
-                const nytResponseJSON = await fetch(nytURL)
+                await fetch(nytURL)
                 .then(res => {
-                    const nytData = res.json();
-                    return nytData
+                    return res.json();
                 })
                 .then(res => {
                     return setNytArticles(res.response.docs)
                 })
-                .then(res => {                          // adding publisher designation for later filtering
+                .then(() => {                          // adding publisher designation for later filtering
                     nytArticles.forEach(article => {
                         article.publisher = 'nyt';
                     })
                 })
+          
+                await fetch(guardianURL)
                 .then(res => {
-                    console.log(nytArticles, 'nyt articles set')
-                })
-                
-                const guardianResponseJSON =  await fetch(guardianURL)
-                .then(res => {
-                    const guardianData = res.json();
-                    return guardianData
+                    return res.json();
                 })
                 .then(res => {
                     return setGuardianArticles(res.response.results)
                 })
-                .then(res => {
+                .then(() => {
                     guardianArticles.forEach(article => {
                         article.publisher = 'guardian'
                     })
-                })
-                .then(res => {
-                    console.log(guardianArticles, 'guardian articles set')
                 })
             } catch (err) {
                 console.log('error making api call =>', err)
