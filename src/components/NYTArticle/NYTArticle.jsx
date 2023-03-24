@@ -3,7 +3,7 @@ import {Card, Image, Icon} from 'semantic-ui-react';
 import format from 'date-fns/format';
 
 
-export default function NYTArticle({article, removeBookmark, bookmarks, addBookmark, getBookmarks}){
+export default function NYTArticle({article, removeBookmark, bookmarks, addBookmark}){
  
 
     const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
@@ -32,7 +32,7 @@ export default function NYTArticle({article, removeBookmark, bookmarks, addBookm
         
         <Card key={article._id} raised>
             <Image 
-                src={`http://www.nytimes.com/${article.multimedia[0]?.url}`} 
+                src={`http://www.nytimes.com/${article.multimedia[1]?.url}`} 
                 size='large'
             />
             <a href={article.web_url}>

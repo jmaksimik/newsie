@@ -15,37 +15,24 @@ import * as bookmarkApi from './utils/bookmarkApi';
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser()) // tries to grab a token if one exists
-  const [apiKeywords, setApiKeywords] = useState('')
   const [bookmarks, setBookmark] = useState([])
-  const [bookmarkStatus, setBookmarkStatus] = useState(false)
-
-
-  const bookmarkExists = false
   
   
-  function liftApiKeywords(keywords){
-    setApiKeywords(keywords);
-  }
-
   function handleUserState() {
-    console.log('signup/login handler running');
     setUser(userService.getUser()); // gets JWT from localstorage and decodes it
   }
 
   function handleLogout() {
     userService.logout();
     setUser(null);
-    console.log('logout successful');
   }
 
   async function addBookmark(bookmark) {
     try {
       const response = await bookmarkApi.create(bookmark);
-      console.log(response);
       setBookmark([...bookmarks, response.bookmark]);
 
     } catch(err) {
-      console.log(bookmarkApi)
       console.log(err)
     }
 
@@ -62,17 +49,12 @@ export default function App() {
 
   async function removeBookmark(bookmarkId) {
     try {
-      const response = await bookmarkApi.deleteBookmark(bookmarkId);
-      console.log(response, 'response from bookmarks API');
+      await bookmarkApi.deleteBookmark(bookmarkId);
       getBookmarks();
     } catch (err) {
       console.log(err.message, '<- issue with removing bookmark')
     }
   }
-
-
-
-
 
   if (user) {
     return (
@@ -90,10 +72,7 @@ export default function App() {
         <Route path='/tag/:tagName' element={<TagPage 
                                               loggedUser={user} 
                                               handleLogout={handleLogout} 
-                                              liftApiKeywords={liftApiKeywords} 
-                                              bookmarkStatus={bookmarkStatus}
                                               addBookmark={addBookmark}
-                                              bookmarkExists={bookmarkExists}
                                               bookmarks={bookmarks}
                                               getBookmarks={getBookmarks}
                                               removeBookmark={removeBookmark}
