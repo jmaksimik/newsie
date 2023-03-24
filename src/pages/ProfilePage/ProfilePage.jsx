@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Grid } from 'semantic-ui-react';
 import { Link, useNavigate } from 'react-router-dom'
 
-import tokenService from '../../utils/tokenService';
+import userService from '../../utils/userService';
 
 import PageHeader from '../../components/PageHeader/PageHeader';
 
@@ -12,23 +12,20 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
         lastName: loggedUser.lastName,
         email: loggedUser.email,
         password: loggedUser.password,
-        passwordConf: ''
+        passwordConf: loggedUser.password
     })
 
     const navigate = useNavigate();
 
-    function generateToken(token) {
-        tokenService.setToken(token)
-        tokenService.getToken()
-        tokenService.getUserFromToken();
-    }
-
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         try {
-
-            generateToken();
-            navigate('/profile');
+            if (state.password == state.passwordConf){
+                userService.updateUser(state);
+                navigate('/profile')
+            } else {
+                throw new Error("Passwords don't match!")
+            }
         } catch (err) {
             console.log(err, 'error in updating profile')
         }
@@ -78,6 +75,7 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
                             type='password'
                             value={state.password}
                             onChange={handleChange}
+                            default=''
 
                         />
                         <Form.Input
@@ -86,7 +84,7 @@ export default function ProfilePage({ loggedUser, handleLogout, handleUserState 
                             type='password'
                             value={state.passwordConf}
                             onChange={handleChange}
-
+                            default=''
                         />
                         <Button type='submit' className='btn'>
                             Save

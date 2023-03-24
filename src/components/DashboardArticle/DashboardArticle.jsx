@@ -7,10 +7,8 @@ export default function DashboardArticle({ article, removeBookmark, bookmarks, a
 
 
     const formattedDate = format(new Date(article.published_date), 'MM/dd/yyyy ')
-    console.log(bookmarks, '<- bookmarks ')
     const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.title)
     const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
-    console.log(bookmarkIndex);
 
 
 
