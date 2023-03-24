@@ -53,7 +53,13 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, addB
 
     useEffect(() => {
         function combineArticles() {                     // combining articles into a single array to be filtered on render
-            try {
+            try {   
+                    nytArticles.forEach(article => {
+                        article.publisher = 'nyt'
+                    });
+                    guardianArticles.forEach(article => {
+                        article.publisher = 'guardian'
+                    });
                     const joinedArray = [...nytArticles, ...guardianArticles];
                     return setJoinedArticles(joinedArray);
             } catch (err) {
@@ -62,6 +68,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, addB
         } 
 
         combineArticles();
+        console.log(joinedArticles)
     }, [nytArticles])
 
     return (

@@ -6,9 +6,9 @@ import format from 'date-fns/format';
 export default function NYTArticle({article, removeBookmark, bookmarks, addBookmark}){
  
 
-    const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
-    const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
-    const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
+    // const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
+    // const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
+    // const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
 
 
 
@@ -22,32 +22,58 @@ export default function NYTArticle({article, removeBookmark, bookmarks, addBookm
         addBookmark(bookmark)
     }
 
-    const clickHandler = bookmarkIndex > -1 ? 
-        () => removeBookmark(bookmarks[bookmarkIndex]._id) : () => handleAddBookmark(article._id)
+    // const clickHandler = bookmarkIndex > -1 ? 
+    //     () => removeBookmark(bookmarks[bookmarkIndex]._id) : () => handleAddBookmark(article._id)
 
 
     
-
-    return (
-        
-        <Card key={article._id} raised>
+    if (article.publisher == 'nyt'){
+        return (
+            <Card key={article._id} raised>
+                <Image 
+                    src={`http://www.nytimes.com/${article.multimedia[1]?.url}`} 
+                    size='large'
+                />
+                <a href={article.web_url}>
+                    <Card.Header as='h2'>
+                        {article.headline.main}
+                    </Card.Header>
+                 </a> 
+                <Card.Content textAlign={'left'}>
+                    {/* {formattedDate} - {article.lead_paragraph} */}
+                    <br></br>
+                    <Icon name={'bookmark'} 
+                          size='large' 
+                        //   color={bookmarkColor} 
+                        //   onClick={clickHandler} 
+                    />
+                </Card.Content>
+            </Card>
+        )
+    }
+    if (article.publisher == 'guardian'){
+        return(
+            <Card key={article._id} raised>
             <Image 
-                src={`http://www.nytimes.com/${article.multimedia[1]?.url}`} 
+                src={article.fields.thumbnail} 
                 size='large'
             />
-            <a href={article.web_url}>
+            <a href={article.webUrl}>
                 <Card.Header as='h2'>
-                    {article.headline.main}
+                    {article.webTitle}
                 </Card.Header>
              </a> 
             <Card.Content textAlign={'left'}>
-                {formattedDate} - {article.lead_paragraph}
+                {/* {formattedDate} - {article.fields.trailText} */}
                 <br></br>
                 <Icon name={'bookmark'} 
                       size='large' 
-                      color={bookmarkColor} 
-                      onClick={clickHandler} />
+                    //   color={bookmarkColor} 
+                    //   onClick={clickHandler} 
+                      />
             </Card.Content>
         </Card>
-    )
+        )
+    }
+
 }

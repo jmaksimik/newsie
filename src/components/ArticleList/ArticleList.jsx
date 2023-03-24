@@ -4,10 +4,10 @@ import {Card, Segment} from 'semantic-ui-react';
 import NYTArticle from '../NYTArticle/NYTArticle';
 import GuardianArticle from '../GuardianArticle/GuardianArticle';
 
-export default function ArticleList({nytArticles, bookmarks, removeBookmark, addBookmark, getBookmarks, guardianArticles}){
+export default function ArticleList({nytArticles, bookmarks, removeBookmark, addBookmark, getBookmarks, guardianArticles, joinedArticles}){
     return (
         <Card.Group itemsPerRow={3} stackable>
-            {nytArticles.map((article) => {
+            {joinedArticles?.map((article) => {
                 return (
                     <NYTArticle
                         article={article}
@@ -20,7 +20,7 @@ export default function ArticleList({nytArticles, bookmarks, removeBookmark, add
                 )
             }
             )}
-            {guardianArticles.map((article) => {
+            {/* {guardianArticles.map((article) => {
                 return (
                     <GuardianArticle 
                         article={article}
@@ -32,7 +32,7 @@ export default function ArticleList({nytArticles, bookmarks, removeBookmark, add
                     />
                 )
 
-            })}
+            })} */}
         </Card.Group>
     )
 }
