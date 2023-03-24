@@ -2,7 +2,6 @@ import React from 'react';
 import {Card, Segment} from 'semantic-ui-react';
 
 import NYTArticle from '../NYTArticle/NYTArticle';
-import GuardianArticle from '../GuardianArticle/GuardianArticle';
 
 export default function ArticleList({nytArticles, bookmarks, removeBookmark, addBookmark, getBookmarks, guardianArticles, joinedArticles}){
     return (

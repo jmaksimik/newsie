@@ -56,6 +56,7 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, addB
             try {   
                     nytArticles.forEach(article => {
                         article.publisher = 'nyt';
+                        article.webTitle = article.headline.main
                     });
                     guardianArticles.forEach(article => {
                         article.publisher = 'guardian';
