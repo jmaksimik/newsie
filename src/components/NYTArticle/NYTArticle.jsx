@@ -6,7 +6,7 @@ import format from 'date-fns/format';
 export default function NYTArticle({article, removeBookmark, bookmarks, addBookmark}){
  
 
-    // const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
+    const formattedDate = format(new Date(article.pub_date), 'MM/dd/yyyy ')
     // const bookmarkIndex = bookmarks?.findIndex(bookmark => bookmark.title === article.headline.main)
     // const bookmarkColor = bookmarkIndex > -1 ? 'yellow' : 'black';
 
@@ -40,7 +40,7 @@ export default function NYTArticle({article, removeBookmark, bookmarks, addBookm
                     </Card.Header>
                  </a> 
                 <Card.Content textAlign={'left'}>
-                    {/* {formattedDate} - {article.lead_paragraph} */}
+                    {formattedDate} - {article.lead_paragraph}
                     <br></br>
                     <Icon name={'bookmark'} 
                           size='large' 
@@ -64,7 +64,7 @@ export default function NYTArticle({article, removeBookmark, bookmarks, addBookm
                 </Card.Header>
              </a> 
             <Card.Content textAlign={'left'}>
-                {/* {formattedDate} - {article.fields.trailText} */}
+                {formattedDate} - {article.fields.trailText}
                 <br></br>
                 <Icon name={'bookmark'} 
                       size='large' 

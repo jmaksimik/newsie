@@ -55,10 +55,11 @@ export default function TagPage({ loggedUser, handleLogout, removeBookmark, addB
         function combineArticles() {                     // combining articles into a single array to be filtered on render
             try {   
                     nytArticles.forEach(article => {
-                        article.publisher = 'nyt'
+                        article.publisher = 'nyt';
                     });
                     guardianArticles.forEach(article => {
-                        article.publisher = 'guardian'
+                        article.publisher = 'guardian';
+                        article.pub_date = article.webPublicationDate // standardizing pub_date for sorting and rendering in the article component
                     });
                     const joinedArray = [...nytArticles, ...guardianArticles];
                     return setJoinedArticles(joinedArray);
